@@ -138,6 +138,7 @@ static void handleKey(int key, ToyParams& params, const Device& dev, const Targe
     case GLFW_KEY_DOWN: params.octaves = std::max(params.octaves, 2u) - 1; break;
     case GLFW_KEY_S:
       if (!hooks.savePath.empty()) {
+        std::filesystem::create_directories(std::filesystem::path(hooks.savePath).parent_path());
         writePng(hooks.savePath, readTarget(dev, target), target.width, target.height);
         std::cout << label("saved") << hooks.savePath << std::endl;
       }
